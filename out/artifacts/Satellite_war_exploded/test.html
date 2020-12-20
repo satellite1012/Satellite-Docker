@@ -1,0 +1,59 @@
+<html lang="en">
+
+<head>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <script src="Resource/js/matter.js"></script>
+            <script>
+                let engine = Matter.Engine.create();
+                let render = Matter.Render.create({
+                    element: document.body,
+                    engine: engine
+                });
+
+                let ground = Matter.Bodies.rectangle(400, 600, 810, 60, {
+                    isStatic: true
+                });
+
+                let a=Matter.Composites.stack(300,200,6,28,3,3,function(x,y){
+                    return Matter.Bodies.rectangle(x,y,4,4);
+                });
+
+                let b=Matter.Composites.stack(screenX,screenY,8,28,3,3,function(x,y){
+                    return Matter.Bodies.rectangle(x,y,12,12);
+                },{isStatic: true});
+
+                let mouse = Matter.Mouse.create(render.canvas);
+                let mouseConstraint = Matter.MouseConstraint.create(engine, {
+                    mouse: mouse,
+                    constraint: {
+                        render: {
+                            visible: false
+                        }
+                    },
+                    //onclick: Matter.World.add(engine.world, [b])
+                });
+                render.mouse = mouse;
+                Matter.World.add(engine.world, [a, ground, mouseConstraint]);
+                Matter.Engine.run(engine);
+                Matter.Render.run(render);
+            </script>
+        </div>
+        <div class="col-md-6">
+            <h2>ccc</h2>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
+

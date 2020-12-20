@@ -1,0 +1,160 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <constant name="struts.enable.SlashesInActionNames" value="true"/>
+    <constant name="struts.mapper.alwaysSelectFullNamespace" value="false"/>
+    <constant name="struts.patternMatcher" value="regex" />
+    <package name="default" extends="struts-default">
+        <!--=== ĐIỀU HƯỚNG ===-->
+        <action name="index" class="main.java.Controllers.HomeController" method="loadContentFirst">
+            <result>index.jsp</result>
+        </action>
+        <action name="document" class="main.java.Controllers.DocumentController" method="loadContentFirst">
+            <result>Site/FPT/document.jsp</result>
+        </action>
+        <action name="projects" class="main.java.Controllers.ProductController" method="loadContentFirst">
+            <result>projects.jsp</result>
+        </action>
+        <action name="blog">
+            <result>blog.jsp</result>
+        </action>
+        <action name="about" class="main.java.Controllers.HomeController" method="loadContributorList">
+            <result>about.jsp</result>
+        </action>
+        <action name="myteam" class="main.java.Controllers.ProductController" method="loadContentFirst">
+            <result>Site/FPT/myteam.jsp</result>
+        </action>
+        <action name="tool" class="main.java.Controllers.ToolController" method="getListTool">
+            <result>Site/FPT/tool.jsp</result>
+        </action>
+        <!--=== ĐIỀU HƯỚNG KHÁC ===-->
+        <action name="javacode" class="main.java.Controllers.ProductController" method="loadContentFirst">
+            <result>Site/Project/javacode.jsp</result>
+        </action>
+        <action name="mygame" class="main.java.Controllers.ProductController" method="loadContentFirst">
+            <result>Site/Project/mygame.jsp</result>
+        </action>
+        <action name="myapp" class="main.java.Controllers.ProductController" method="loadContentFirst">
+            <result>Site/Project/myapp.jsp</result>
+        </action>
+        <action name="login">
+            <result>Site/Private/login.jsp</result>
+        </action>
+
+        <!--=== ĐĂNG NHẬP ===-->
+        <action name="user_login" class="main.java.Controllers.UserController" method="login">
+            <result name="success" type="redirectAction">index</result>
+            <result name="failure" type="redirectAction">login</result>
+        </action>
+        <action name="user_logout" class="main.java.Controllers.UserController" method="logout">
+            <result name="success" type="redirectAction">index</result>
+        </action>
+        <action name="user_login_mail" class="main.java.Controllers.UserController" method="loginEmail">
+            <result name="success" type="redirectAction">index</result>
+            <result name="failure" type="redirectAction">login</result>
+        </action>
+
+        <!--=== TÀI LIỆU ===-->
+        <action name="view_normal_document" class="main.java.Controllers.DocumentController" method="viewNormalDocument">
+            <result name="success">Site/FPT/Document/viewDocument.jsp</result>
+            <result name="failure" type="redirectAction">document</result>
+        </action>
+        <action name="view_remote_document" class="main.java.Controllers.DocumentController" method="viewRemoteDocument">
+            <result name="success">Site/FPT/Document/remoteDocument.jsp</result>
+            <result name="failure" type="redirectAction">document</result>
+        </action>
+        <action name="down_remote_document" class="main.java.Controllers.DocumentController" method="downRemoteDocument">
+            <result name="success">Site/FPT/Document/remoteDocument.jsp</result>
+            <result name="failure" type="redirectAction">document</result>
+        </action>
+        <action name="inc_view_document" class="main.java.Controllers.DocumentController" method="incViewDocument">
+            <result name="success"></result>
+        </action>
+
+        <!--=== NGƯỜI DÙNG ===-->
+        <action name="edit_user_1" class="main.java.Controllers.UserController" method="editUser1">
+            <result name="success">Site/Private/profile.jsp</result>
+            <result name="failure">Site/Private/profile.jsp</result>
+        </action>
+        <action name="edit_user_0" class="main.java.Controllers.UserController" method="editUser0">
+            <result name="success">Site/Private/profile.jsp</result>
+            <result name="failure">Site/Private/profile.jsp</result>
+        </action>
+        <action name="updateUserImage" class="main.java.Controllers.UserController" method="updateUserImage">
+            <result name="success">Site/Private/profile.jsp</result>
+            <result name="failure">Site/Private/profile.jsp</result>
+        </action>
+        <action name="profile/{userId_view}" class="main.java.Controllers.UserController" method="viewUser">
+            <result>/Site/Private/profile.jsp</result>
+        </action>
+
+        <!--=== QA ===-->
+        <action name="qaFPT" class="main.java.Controllers.QAController" method="getQAListFPT">
+            <result name="success">Site/FPT/qa.jsp</result>
+            <result name="failure">Site/FPT/qa.jsp</result>
+        </action>
+        <action name="viewQAFPT" class="main.java.Controllers.QAController" method="getQAFPT">
+            <result name="success">Site/FPT/QA/qa.jsp</result>
+            <result name="failure" type="redirectAction">error_404</result>
+        </action>
+        <action name="addQaFPT" class="main.java.Controllers.QAController" method="addQaFPT">
+            <result name="success">AJAX/success.jsp</result>
+            <result name="failure">AJAX/failure.jsp</result>
+        </action>
+        <action name="addCmt" class="main.java.Controllers.QAController" method="addCmt">
+            <result name="success">AJAX/cmt_fpt_success.jsp</result>
+            <result name="failure">AJAX/failure.jsp</result>
+        </action>
+        <action name="likeCmt" class="main.java.Controllers.QAController" method="likeCmt">
+            <result name="success">AJAX/success.jsp</result>
+            <result name="failure">AJAX/failure.jsp</result>
+        </action>
+
+        <!--=== CHANGE LOG ===-->
+        <action name="view_change_log" class="main.java.Controllers.LogController" method="viewChangeLog">
+            <result name="success">Site/Private/changeLog.jsp</result>
+            <result name="failure">Site/Private/status.jsp</result>
+        </action>
+
+        <!--=== CV ===-->
+        <action name="view_cv_satellite1012">
+            <result>Site/Private/cv.jsp</result>
+        </action>
+
+        <!--=== ADMIN FUNCTION ===-->
+        <action name="reloadQAFPTList" class="main.java.Controllers.AdminController" method="reloadQAFPTList">
+            <result name="success">AJAX/success.jsp</result>
+            <result name="failure">AJAX/failure.jsp</result>
+        </action>
+        <action name="reloadToolList" class="main.java.Controllers.AdminController" method="reloadToolList">
+            <result name="success">AJAX/success.jsp</result>
+            <result name="failure">AJAX/failure.jsp</result>
+        </action>
+        <action name="reloadProductList" class="main.java.Controllers.AdminController" method="reloadProductList">
+            <result name="success">AJAX/success.jsp</result>
+            <result name="failure">AJAX/failure.jsp</result>
+        </action>
+        <action name="reloadCommentList" class="main.java.Controllers.AdminController" method="reloadCmtList">
+            <result name="success">AJAX/success.jsp</result>
+            <result name="failure">AJAX/failure.jsp</result>
+        </action>
+
+        <!--=== BẮT LỖI ===-->
+        <action name="warning">
+            <result>Common/warning.jsp</result>
+        </action>
+        <action name="error_cheat">
+            <result name="success" type="redirectAction">index</result>
+        </action>
+        <action name="error_overload">
+            <result name="success" type="redirectAction">index</result>
+        </action>
+        <action name="error_404">
+            <result name="success" type="redirectAction">index</result>
+        </action>
+
+    </package>
+
+</struts>
